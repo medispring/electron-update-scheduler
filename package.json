@@ -1,6 +1,6 @@
 {
   "name": "electron-update-scheduler",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Schedule update of electron with external API",
   "main": "main.js",
   "scripts": {
