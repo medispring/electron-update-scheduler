@@ -45,6 +45,7 @@
         const restartButton = document.getElementById('restart-button');
 
         ipcRenderer.send('app_version');
+
         ipcRenderer.on('app_version', (event, arg) => {
             ipcRenderer.removeAllListeners('app_version');
             version.innerText = 'Version ' + arg.version;
@@ -59,6 +60,10 @@
             message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
             restartButton.classList.remove('hidden');
             notification.classList.remove('hidden');
+        });
+        ipcRenderer.on('checking-for-update', () => {
+            ipcRenderer.removeAllListeners('checking-for-update');
+            console.log('autoUpdater: checking for update');
         });
 
         function closeNotification() {

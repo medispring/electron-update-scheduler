@@ -50,6 +50,10 @@ autoUpdater.setFeedURL({
     repo: 'electron-update-scheduler'
 });
 
+autoUpdater.on('checking-for-update', () => {
+    mainWindow.webContents.send('checking-for-update');
+});
+
 autoUpdater.on('update-available', () => {
     mainWindow.webContents.send('update_available');
 });
