@@ -44,6 +44,12 @@ ipcMain.on('restart_app', () => {
     autoUpdater.quitAndInstall();
 });
 
+autoUpdater.setFeedURL({
+    provider: 'github',
+    owner: 'medispring',
+    repo: 'electron-update-scheduler'
+});
+
 autoUpdater.on('update-available', () => {
     mainWindow.webContents.send('update_available');
 });
