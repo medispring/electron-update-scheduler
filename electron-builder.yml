@@ -1,4 +1,7 @@
 appId: be.medispring.ElectronUpdateScheduler
 publish:
   provider: github
+  owner: medispring
+  repo: electron-update-scheduler
+  releaseType: draft
   #token: set a GH_TOKEN environment variable before publish it
