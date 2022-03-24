@@ -1,0 +1,25 @@
+{
+  "name": "electron-update-scheduler",
+  "version": "1.0.0",
+  "description": "Schedule update of electron with external API",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-builder build --mac --win --publish never",
+    "deploy": "electron-builder build --mac --win --publish always"
+  },
+  "author": "Damien Libouton",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/medispring/electron-update-scheduler.git"
+  },
+  "devDependencies": {
+    "electron": "^17.2.0",
+    "electron-builder": "^22.14.13"
+  },
+  "dependencies": {
+    "electron-updater": "^4.6.5"
+  }
+}
