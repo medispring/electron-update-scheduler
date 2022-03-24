@@ -64,7 +64,6 @@
             console.log('autoUpdater: update downloaded');
         });
         ipcRenderer.on('checking-for-update', () => {
-            ipcRenderer.removeAllListeners('checking-for-update');
             console.log('autoUpdater: checking for update');
         });
 
