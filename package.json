@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "dotenv -e .env electron-builder build --mac --win --publish never",
-    "deploy": "dotenv -e .env electron-builder build --mac --win --publish always"
+    "build": "electron-builder build --mac --win --publish never",
+    "deploy": "electron-builder build --mac --win --publish always"
   },
   "author": "Damien Libouton",
   "license": "ISC",
