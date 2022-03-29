@@ -1,8 +1,13 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
+const fs = require('fs');
+const path = require('path');
 
-const fs = require('fs-extra');
-const config = JSON.parse(fs.readFileSync('config.json'));
+
+const resourcePath = app.isPackaged ? process.resourcesPath : path.join(__dirname, 'resources');
+console.log(`Resource path : ${resourcePath}`);
+const config = JSON.parse(fs.readFileSync(path.join(resourcePath, 'config.json')));
+console.log(`Config : \n${JSON.stringify(config)}`);
 
 let mainWindow;
 

@@ -5,3 +5,13 @@ publish:
   repo: electron-update-scheduler
   releaseType: draft
   #token: set a GH_TOKEN environment variable before publish it
+mac:
+  extraResources:
+    - 
+      from: resources/config.json
+      to: config.json
+win:
+  extraResources:
+    - 
+      from: resources/config.json
+      to: config.json
