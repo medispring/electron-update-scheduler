@@ -85,7 +85,7 @@ autoUpdater.on('update-available', () => {
     const isValid = configIsValid(config);
     mainWindow.webContents.send('update_available_config_is_valid', { configIsValid: isValid });
     if (isValid) {
-        mainWindow.webContents.send('update_available_group_id', { groupId: config.groupId });
+        mainWindow.webContents.send('update_available_group_id', { groupId: config.taktikCredential.groupId });
         if (config.groupId === 'to-update') {
             mainWindow.webContents.send('update_available');
         }
