@@ -1,0 +1,22 @@
+{
+  "OS": "MAC",
+  "migration": {
+    "migrationMode": "never"
+  },
+  "canCreateUser": false,
+  "taktikCredential": {
+    "groupId": "ms-dev2-medispring-29d1181a-2d7f-420c-8a96-4314b20cc09a",
+    "groupPassword": "c7893767-aebe-406e-adf2-dd18aeaa6957"
+  },
+  "eHealthBox": {
+    "eHealthBoxDir": "~/Library/Application Support/MediSpring/eHealthBox",
+    "doneDir": "done"
+  },
+  "installationType": "full",
+  "beidPath": "/Applications",
+  "couchDbPath": "/Applications",
+  "replicationMode": "bi",
+  "odbc": {
+    "manualConfig": false
+  }
+}

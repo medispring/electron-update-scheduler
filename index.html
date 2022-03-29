@@ -28,6 +28,8 @@
 <body>
     <h1>Electron Auto Update Scheduler</h1>
     <p id="version"></p>
+    <p id="config-is-valid"></p>
+    <p id="group-id"></p>
     <div id="notification" class="hidden">
         <p id="message"></p>
         <button id="close-button" onClick="closeNotification()">
@@ -40,6 +42,8 @@
     <script>
         const { ipcRenderer } = require('electron');
         const version = document.getElementById('version');
+        const configIsValid = document.getElementById('config-is-valid');
+        const groupId = document.getElementById('group-id');
         const notification = document.getElementById('notification');
         const message = document.getElementById('message');
         const restartButton = document.getElementById('restart-button');
@@ -56,6 +60,14 @@
             notification.classList.remove('hidden');
             console.log('autoUpdater: update available');
         });
+        ipcRenderer.on('update_available_config_is_valid', (event, arg) => {
+            ipcRenderer.removeAllListeners('update_available_config_is_valid');
+            configIsValid.innerText = 'Update available, config is valid : ' + arg.configIsValid;
+        });
+        ipcRenderer.on('update_available_group_id', (event, arg) => {
+            ipcRenderer.removeAllListeners('update_available_group_id');
+            groupId.innerText = 'Update available, group ID : ' + arg.groupId;
+        });
         ipcRenderer.on('update_downloaded', () => {
             ipcRenderer.removeAllListeners('update_downloaded');
             message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
@@ -63,7 +75,7 @@
             notification.classList.remove('hidden');
             console.log('autoUpdater: update downloaded');
         });
-        ipcRenderer.on('checking-for-update', () => {
+        ipcRenderer.on('checking_for_update', () => {
             console.log('autoUpdater: checking for update');
         });
 

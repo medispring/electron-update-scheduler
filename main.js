@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
+const fs = require('fs-extra');
+const config = JSON.parse(fs.readFileSync('config.json'));
 
 let mainWindow;
 
@@ -23,6 +25,23 @@ function createWindow() {
         }, 30000);
     });
 }
+
+function configIsValid(config) {
+    // TakTik credentials FIXME check with a request
+    return (
+      !!config.taktikCredential &&
+      !!config.taktikCredential.groupId &&
+      !!config.taktikCredential.groupPassword &&
+      // Paths to install
+      !!config.beidPath &&
+      !!config.couchDbPath &&
+      // Replication mode
+      !!config.replicationMode &&
+      // Cannot do migration
+      !!config.migration &&
+      !!config.migration.migrationMode
+    );
+  }
 
 app.on('ready', () => { createWindow(); });
 
@@ -53,11 +72,19 @@ autoUpdater.setFeedURL({
 });
 
 autoUpdater.on('checking-for-update', () => {
-    mainWindow.webContents.send('checking-for-update');
+    mainWindow.webContents.send('checking_for_update');
 });
 
 autoUpdater.on('update-available', () => {
-    mainWindow.webContents.send('update_available');
+    // if available, send the groupId to ws and if elligible for update then propagate the event
+    const isValid = configIsValid(config);
+    mainWindow.webContents.send('update_available_config_is_valid', { configIsValid: isValid });
+    if (isValid) {
+        mainWindow.webContents.send('update_available_group_id', { groupId: config.groupId });
+        if (config.groupId === 'to-update') {
+            mainWindow.webContents.send('update_available');
+        }
+    }
 });
 
 autoUpdater.on('update-downloaded', () => {
