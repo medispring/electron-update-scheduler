@@ -16,7 +16,7 @@
     "url": "https://github.com/medispring/electron-update-scheduler.git"
   },
   "devDependencies": {
-    "electron": "^18.1.0",
+    "electron": "^17.4.1",
     "electron-builder": "^23.0.3"
   },
   "dependencies": {
