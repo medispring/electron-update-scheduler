@@ -11,6 +11,7 @@ mac:
       from: resources/config.json
       to: config.json
 win:
+  requestedExecutionLevel: requireAdministrator
   extraResources:
     - 
       from: resources/config.json
