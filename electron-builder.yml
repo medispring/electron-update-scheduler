@@ -8,10 +8,6 @@ publish:
   #token: set a GH_TOKEN environment variable before publish it
 mac:
   icon: icons/icon.icns
-  target: 
-    target: dmg
-    arch:
-      - x64 
   extraResources:
     - 
       from: resources/config.json
@@ -22,7 +18,6 @@ win:
     target: nsis
     arch:
       - x64
-  requestedExecutionLevel: requireAdministrator
   extraResources:
     - 
       from: resources/config.json
