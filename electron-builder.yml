@@ -1,4 +1,5 @@
 appId: be.medispring.ElectronUpdateScheduler
+forceCodeSigning: false
 publish:
   provider: github
   owner: medispring
@@ -6,13 +7,27 @@ publish:
   releaseType: draft
   #token: set a GH_TOKEN environment variable before publish it
 mac:
+  icon: icons/icon.icns
+  target: 
+    target: dmg
+    arch:
+      - x64 
   extraResources:
     - 
       from: resources/config.json
       to: config.json
 win:
+  icon: icons/icon.ico
+  target:
+    target: nsis
+    arch:
+      - x64
   requestedExecutionLevel: requireAdministrator
   extraResources:
     - 
       from: resources/config.json
       to: config.json
+nsis:
+  oneClick: false
+  perMachine: true
+  runAfterFinish: false
