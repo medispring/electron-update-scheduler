@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "build": "electron-builder build --mac --win --publish never",
-    "deploy": "electron-builder build --mac --win --publish always"
+    "deploy": "electron-builder build --mac --win --publish always",
+    "self-signed": "electron-builder create-self-signed-cert -p be-medispring-electron-update-scheduler"
   },
   "author": "Damien Libouton",
   "license": "ISC",
