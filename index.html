@@ -60,19 +60,29 @@
             notification.classList.remove('hidden');
             console.log('autoUpdater: update available');
         });
-        ipcRenderer.on('update_available_config_is_valid', (event, arg) => {
-            ipcRenderer.removeAllListeners('update_available_config_is_valid');
-            configIsValid.innerText = 'Update available, config is valid : ' + arg.configIsValid;
+        ipcRenderer.on('update_downloaded_config_is_valid', (event, arg) => {
+            ipcRenderer.removeAllListeners('update_downloaded_config_is_valid');
+            configIsValid.innerText = 'Update downloaded, config is valid : ' + arg.configIsValid;
         });
-        ipcRenderer.on('update_available_group_id', (event, arg) => {
-            ipcRenderer.removeAllListeners('update_available_group_id');
-            groupId.innerText = 'Update available, group ID : ' + arg.groupId;
+        ipcRenderer.on('update_downloaded_group_id', (event, arg) => {
+            ipcRenderer.removeAllListeners('update_downloaded_group_id');
+            groupId.innerText = 'Update downloaded, group ID : ' + arg.groupId;
+        });
+        ipcRenderer.on('update_downloaded_to-update', () => {
+            ipcRenderer.removeAllListeners('update_downloaded_to-update');
+            message.innerText = 'Update downloaded. It will be installed if you click on restart button.';
+            restartButton.classList.remove('hidden');
+            notification.classList.remove('hidden');
+        });
+        ipcRenderer.on('update_downloaded_no-update', () => {
+            ipcRenderer.removeAllListeners('update_downloaded_no-update');
+            message.innerText = 'Update downloaded but it won\'t be installed, sorry...';
         });
         ipcRenderer.on('update_downloaded', () => {
             ipcRenderer.removeAllListeners('update_downloaded');
-            message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
-            restartButton.classList.remove('hidden');
-            notification.classList.remove('hidden');
+            message.innerText = 'Update downloaded. It will be installed if to up update is sent.';
+            // restartButton.classList.remove('hidden');
+            // notification.classList.remove('hidden');
             console.log('autoUpdater: update downloaded');
         });
         ipcRenderer.on('checking_for_update', () => {

@@ -27,8 +27,17 @@ function createWindow() {
         mainWindow = null;
     });
     mainWindow.once('ready-to-show', () => {
-        setInterval(() => {
-            autoUpdater.checkForUpdatesAndNotify();
+        let retries = 5;
+        const intervalId = setInterval(() => {
+            log.info(`Interval retry: ${retries}`);
+            if (retries > 0) {
+                log.info(`Check for updates`);
+                retries--;
+                autoUpdater.checkForUpdates();
+            } else {
+                log.info(`Clear check for updates`);
+                clearInterval(intervalId);
+            }
         }, 30000);
     });
 }
@@ -74,6 +83,7 @@ ipcMain.on('restart_app', () => {
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
+autoUpdater.autoInstallOnAppQuit = false;
 
 autoUpdater.setFeedURL({
     provider: 'github',
@@ -86,17 +96,20 @@ autoUpdater.on('checking-for-update', () => {
 });
 
 autoUpdater.on('update-available', () => {
-    // if available, send the groupId to ws and if elligible for update then propagate the event
-    const isValid = configIsValid(config);
-    mainWindow.webContents.send('update_available_config_is_valid', { configIsValid: isValid });
-    if (isValid) {
-        mainWindow.webContents.send('update_available_group_id', { groupId: config.taktikCredential.groupId });
-        if (config.groupId === 'to-update') {
-            mainWindow.webContents.send('update_available');
-        }
-    }
+    mainWindow.webContents.send('update_available');
 });
 
 autoUpdater.on('update-downloaded', () => {
+    // if available, send the groupId to ws and if elligible for update then propagate the event
+    const isValid = configIsValid(config);
+    mainWindow.webContents.send('update-downloaded_config_is_valid', { configIsValid: isValid });
+    if (isValid) {
+        mainWindow.webContents.send('update-downloaded_group_id', { groupId: config.taktikCredential.groupId });
+        if (config.groupId === 'to-update') {
+            mainWindow.webContents.send('update-downloaded_to-update');
+        } else {
+            mainWindow.webContents.send('update-downloaded_no-update');
+        }
+    }
     mainWindow.webContents.send('update_downloaded');
 });
