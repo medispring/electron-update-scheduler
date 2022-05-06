@@ -48,6 +48,8 @@
         const message = document.getElementById('message');
         const restartButton = document.getElementById('restart-button');
 
+        localStorage.setItem(new Date().toISOString(), 'Check');
+
         ipcRenderer.send('app_version');
 
         ipcRenderer.on('app_version', (event, arg) => {
