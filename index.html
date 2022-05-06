@@ -79,12 +79,11 @@
         ipcRenderer.on('update-downloaded_no-update', () => {
             ipcRenderer.removeAllListeners('update-downloaded_no-update');
             message.innerText = 'Update downloaded but it won\'t be installed, sorry...';
+            notification.classList.remove('hidden');
         });
         ipcRenderer.on('update_downloaded', () => {
             ipcRenderer.removeAllListeners('update_downloaded');
             message.innerText = 'Update downloaded. It will be installed if to up update is sent.';
-            // restartButton.classList.remove('hidden');
-            // notification.classList.remove('hidden');
             console.log('autoUpdater: update downloaded');
         });
         ipcRenderer.on('checking_for_update', () => {
