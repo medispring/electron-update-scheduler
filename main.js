@@ -102,12 +102,16 @@ autoUpdater.on('update-available', () => {
 autoUpdater.on('update-downloaded', () => {
     // if available, send the groupId to ws and if elligible for update then propagate the event
     const isValid = configIsValid(config);
+    log.info(`Config is valid ? : ${isValid}`);
     mainWindow.webContents.send('update-downloaded_config_is_valid', { configIsValid: isValid });
     if (isValid) {
+        log.info(`GroupId : ${config.taktikCredential.groupId}`);
         mainWindow.webContents.send('update-downloaded_group_id', { groupId: config.taktikCredential.groupId });
-        if (config.groupId === 'to-update') {
+        if (config.taktikCredential.groupId === 'to-update') {
+            log.info(`Send update`);
             mainWindow.webContents.send('update-downloaded_to-update');
         } else {
+            log.info(`Send don't update`);
             mainWindow.webContents.send('update-downloaded_no-update');
         }
     }

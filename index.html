@@ -62,22 +62,22 @@
             notification.classList.remove('hidden');
             console.log('autoUpdater: update available');
         });
-        ipcRenderer.on('update_downloaded_config_is_valid', (event, arg) => {
-            ipcRenderer.removeAllListeners('update_downloaded_config_is_valid');
+        ipcRenderer.on('update-downloaded_config_is_valid', (event, arg) => {
+            ipcRenderer.removeAllListeners('update-downloaded_config_is_valid');
             configIsValid.innerText = 'Update downloaded, config is valid : ' + arg.configIsValid;
         });
-        ipcRenderer.on('update_downloaded_group_id', (event, arg) => {
-            ipcRenderer.removeAllListeners('update_downloaded_group_id');
+        ipcRenderer.on('update-downloaded_group_id', (event, arg) => {
+            ipcRenderer.removeAllListeners('update-downloaded_group_id');
             groupId.innerText = 'Update downloaded, group ID : ' + arg.groupId;
         });
-        ipcRenderer.on('update_downloaded_to-update', () => {
-            ipcRenderer.removeAllListeners('update_downloaded_to-update');
+        ipcRenderer.on('update-downloaded_to-update', () => {
+            ipcRenderer.removeAllListeners('update-downloaded_to-update');
             message.innerText = 'Update downloaded. It will be installed if you click on restart button.';
             restartButton.classList.remove('hidden');
             notification.classList.remove('hidden');
         });
-        ipcRenderer.on('update_downloaded_no-update', () => {
-            ipcRenderer.removeAllListeners('update_downloaded_no-update');
+        ipcRenderer.on('update-downloaded_no-update', () => {
+            ipcRenderer.removeAllListeners('update-downloaded_no-update');
             message.innerText = 'Update downloaded but it won\'t be installed, sorry...';
         });
         ipcRenderer.on('update_downloaded', () => {
